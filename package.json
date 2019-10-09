@@ -1,0 +1,19 @@
+{
+  "name": "01.projeto_devshop",
+  "version": "1.0.0",
+  "description": "Loja Virtual v0.001",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "Tiago Mendes",
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "knex": "^0.19.4",
+    "mysql2": "^1.7.0"
+  }
+}
