@@ -31,6 +31,13 @@ db.on('query', query => {
 
 const app = require('./app')(db)
 
+const user = require('./models/user')
+user.initialUser(db)()
+
+// cria usuario aleatorio com roles diferentes
+// user.createUser(db)('user','user@user.com', '123')
+
+
 app.listen(port, err => {
     if(err) print('Nao foi possivel iniciar o servidor...')
     else print('DevShop rodando na porta:', port)

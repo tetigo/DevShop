@@ -1,6 +1,8 @@
 const catRouter = require('./categories')
 const prodRouter = require('./products')
 const homeRouter = require('./home')
+const authRouter = require('./auth')
+const logout = require('../controllers/auth')
 
 const init = db => {
     const router = require('express').Router()
@@ -19,6 +21,8 @@ const init = db => {
     router.use('/'         , homeRouter(db))
     router.use('/categoria', catRouter(db))
     router.use('/produto'  , prodRouter(db))
+    router.use('/login'    , authRouter(db))
+    router.use('/logout'    , logout.logout)
     return router
 
     
