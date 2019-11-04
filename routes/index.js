@@ -4,6 +4,8 @@ const homeRouter = require('./home')
 const authRouter = require('./auth')
 const logout = require('../controllers/auth')
 
+const admin = require('./admin')
+
 const init = db => {
     const router = require('express').Router()
     //para ligar aplicacao no router usa-se 
@@ -19,13 +21,14 @@ const init = db => {
 
     // versao COM endpoint
     router.use('/'         , homeRouter(db))
+    router.use('/login'    , authRouter(db))
+    router.use('/logout'   , logout.logout)
+    
+    router.use('/admin'    , admin(db))
     router.use('/categoria', catRouter(db))
     router.use('/produto'  , prodRouter(db))
-    router.use('/login'    , authRouter(db))
-    router.use('/logout'    , logout.logout)
-    return router
-
     
+    return router
 }
 
 module.exports = init

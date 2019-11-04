@@ -1,5 +1,7 @@
 const print = (msg1, msg2='') => console.log(msg1,msg2);
 
+const Joi = require('@hapi/joi')
+
 //https://gist.github.com/mathewbyrne/1280286
 const slugify = (text, separator) => {
     text = text.toString().toLowerCase().trim();
@@ -51,7 +53,43 @@ const slugify = (text, separator) => {
     return text;
 }
 
+const ValidationError = (message, errors)=>({
+    message,
+    errors
+})
+
+const extractError = error => {
+    if (error.details){
+        const vet = []
+        error.details.forEach(element => {
+            const obj = {
+                type: element.type,
+                description: element.message,
+                field: element.path[0]
+            }
+            vet.push(obj)
+            // console.log(element.path[0])
+        });
+        return vet   
+    }
+}
+const validate = (obj, schema) => {
+    try {
+        const {error, value} = Joi.validate(obj, schema, {abortEarly: false, stripUnknown: true})
+        if(error){
+            // throw error
+            throw ValidationError('validation', extractError(error))
+        }else{
+            return value
+        }
+    } catch (error) {
+        throw error        
+    }
+}
+
+
 module.exports = {
     print,
-    slugify
+    slugify, 
+    validate,
 }

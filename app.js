@@ -19,7 +19,9 @@ const init = db => {
 
     app.use(session({
         secret: "DevShopTigo",
-        name: 'sessionIDTigo'
+        name: 'sessionIDTigo',
+        resave: true, 
+        saveUninitialized: false
     }))
 
     app.use(express.static(path.join(__dirname, 'public')))
